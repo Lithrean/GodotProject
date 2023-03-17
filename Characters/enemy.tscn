@@ -1,0 +1,87 @@
+[gd_scene load_steps=13 format=3 uid="uid://dl4d08p6fuqid"]
+
+[ext_resource type="Script" path="res://Characters/enemy.gd" id="1_duhdy"]
+[ext_resource type="Texture2D" uid="uid://dlfvwefmunp15" path="res://Art/Standard sprites upd.png" id="2_tmthg"]
+[ext_resource type="PackedScene" uid="uid://d0ciut7nvr3jm" path="res://Boxes/hit_box.tscn" id="3_i0fmc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7t67g"]
+atlas = ExtResource("2_tmthg")
+region = Rect2(112, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2fv8l"]
+atlas = ExtResource("2_tmthg")
+region = Rect2(128, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4h1lx"]
+atlas = ExtResource("2_tmthg")
+region = Rect2(144, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hl17l"]
+atlas = ExtResource("2_tmthg")
+region = Rect2(160, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_52f55"]
+atlas = ExtResource("2_tmthg")
+region = Rect2(176, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t5b60"]
+atlas = ExtResource("2_tmthg")
+region = Rect2(192, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d6yq2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7t67g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2fv8l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4h1lx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hl17l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_52f55")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t5b60")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_di5g1"]
+size = Vector2(16, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fu5fi"]
+size = Vector2(16, 13)
+
+[node name="enemy" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_duhdy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_d6yq2")
+animation = &"walk"
+autoplay = "walk"
+frame_progress = 0.0410793
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_di5g1")
+
+[node name="HitBox" parent="." instance=ExtResource("3_i0fmc")]
+collision_layer = 4
+collision_mask = 2
+monitoring = false
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_fu5fi")
+
+[editable path="HitBox"]
